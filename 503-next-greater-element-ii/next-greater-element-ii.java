@@ -1,6 +1,6 @@
 class Solution {
     public int[] nextGreaterElements(int[] nums) {
-         int n = nums.length;
+        int n = nums.length;
         int[] result = new int[n];
         Arrays.fill(result, -1); 
         Stack<Integer> stack = new Stack<>();
