@@ -1,19 +1,22 @@
 class Solution {
-    public static int leftSearch(int[] nums,int target) {
-        int r = nums.length-1;
-        int l = 0;
-        while(l<=r) {
-            int m = l + (r-l)/2;
-            if(target > nums[m]) l = m+1;
-            else r = m-1;
-        }
-        return l;
-    }
     public int[] searchRange(int[] nums, int target) {
-        int[] result = new int[2];
-        int l = leftSearch(nums,target);
-        if(l== nums.length || target!=nums[l]) return new int[]{-1,-1};
-        int r = leftSearch(nums,target+1);
-        return new int[]{l,r-1};
+        int n = nums.length;
+        int [] arr = new int[2];
+        arr[0] =-1;
+        arr[1] = -1;
+        for(int i=0; i<=n-1; i++){
+            if(nums[i] == target) {
+                arr[0] = i;
+                break;
+            }
+        }
+        for(int j=n-1; j>=0; j--){
+            if(nums[j] == target) {
+                arr[1] = j;
+                break;
+            }
+        }
+        return arr;
+
     }
 }
