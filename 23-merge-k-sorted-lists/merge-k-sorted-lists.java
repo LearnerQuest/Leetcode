@@ -9,39 +9,35 @@
  * }
  */
 class Solution {
-    public ListNode mergeKLists(ListNode[] lists) {
+    public ListNode mergeTwo(ListNode a, ListNode b) {
+        ListNode dummy = new ListNode(-1);
+        ListNode temp = dummy;
 
-        if (lists == null || lists.length == 0) {
-            return null;
-        }
-
-        ListNode result = lists[0];
-        for(int i=1;i<lists.length;i++){
-            result = mergeList(result,lists[i]);
-        }
-        return result;
-    }
-
-    public ListNode mergeList(ListNode list1,ListNode list2){
-        ListNode temp = new ListNode(0);
-        ListNode current = temp;
-
-        while(list1!=null && list2!=null){
-            if(list1.val < list2.val){
-                current.next = list1;
-                list1 = list1.next;
-            }else{
-                current.next = list2;
-                list2 = list2.next;
+        while (a != null && b != null) {
+            if (a.val <= b.val) {
+                temp.next = a;
+                a = a.next;
+            } else {
+                temp.next = b;
+                b = b.next;
             }
-            current = current.next;
+            temp = temp.next;
         }
-        if(list1!=null){
-            current.next = list1;
+
+        if (a != null) temp.next = a;
+        else temp.next = b;
+
+        return dummy.next;
+    }
+    public ListNode mergeKLists(ListNode[] lists) {
+        if (lists == null || lists.length == 0) return null;
+
+        ListNode ans = null;
+
+        for (int i = 0; i < lists.length; i++) {
+            ans = mergeTwo(ans, lists[i]);
         }
-        if(list2!=null){
-            current.next = list2;
-        }
-        return temp.next;
+
+        return ans;
     }
 }
